@@ -10,7 +10,7 @@ export const BUSINESS_TAGLINE = 'Skardu Dry Fruits & Natural Products';
 
 // WhatsApp business number in international format, no "+" and no spaces.
 // Example: Pakistani number 0301 2345678 -> "923012345678"
-export const WHATSAPP_NUMBER = '923XXXXXXXXX';
+export const WHATSAPP_NUMBER = '923479626375';
 
 export const CONTACT = {
   phone: '+92 3XX XXXXXXX',
