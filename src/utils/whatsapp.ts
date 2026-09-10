@@ -3,14 +3,39 @@ import type { CartItem, CustomerDetails } from '@/types';
 import { formatPrice } from './currency';
 
 /**
+ * Generates a short, human-friendly order reference like "HB-4821".
+ * This gives the owner something to search for / refer back to when
+ * multiple orders come in on WhatsApp the same day.
+ */
+function generateOrderReference(): string {
+  const num = Math.floor(1000 + Math.random() * 9000); // 4-digit number
+  return `HB-${num}`;
+}
+
+/**
  * Builds a professional, human-readable order message for WhatsApp.
+ * Includes an order reference + timestamp so the business owner can
+ * easily track/search for the order later, plus a full breakdown of
+ * every item and the customer's delivery details.
  */
 export function buildOrderMessage(customer: CustomerDetails, items: CartItem[], subtotal: number): string {
   const lines: string[] = [];
+  const orderRef = generateOrderReference();
+  const placedAt = new Date().toLocaleString('en-PK', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
 
   lines.push(`Assalam o Alaikum ${BUSINESS_NAME}`);
   lines.push('');
   lines.push('I would like to place an order.');
+  lines.push('');
+  lines.push(`Order Ref: ${orderRef}`);
+  lines.push(`Date: ${placedAt}`);
   lines.push('');
   lines.push('Customer Details');
   lines.push('');
@@ -19,7 +44,7 @@ export function buildOrderMessage(customer: CustomerDetails, items: CartItem[], 
   lines.push(`City: ${customer.city}`);
   lines.push(`Address: ${customer.address}`);
   lines.push('');
-  lines.push('Order Details');
+  lines.push(`Order Details (${totalItems} item${totalItems === 1 ? '' : 's'})`);
   lines.push('');
 
   items.forEach((item, index) => {

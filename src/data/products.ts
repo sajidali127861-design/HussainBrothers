@@ -1,12 +1,22 @@
 import type { Product } from '@/types';
+import { PRODUCT_IMAGES, CATEGORY_IMAGES, getFallbackImage } from './media';
 
 /**
- * Placeholder product images.
- * Replace these URLs with real product photography before launch —
- * simply swap the `images` array per product; no other code needs to change.
+ * Product catalogue.
+ *
+ * Images are intentionally NOT written inline here — they live in
+ * `src/data/media.ts`, keyed by each product's `slug`. This means you
+ * (or whoever manages the site later) can change every photo on the
+ * site from ONE file, without touching this data or any UI component.
+ *
+ * To add a new product: add an entry below with a new `slug`, then add
+ * a matching entry in `PRODUCT_IMAGES` inside media.ts. If you forget,
+ * the site still works — it falls back to a labelled placeholder image
+ * automatically, so nothing breaks.
  */
-const placeholder = (label: string, bg: string) =>
-  `https://placehold.co/800x800/${bg}/FAF6EC?font=playfair-display&text=${encodeURIComponent(label)}`;
+
+const imagesFor = (slug: string, label: string): string[] =>
+  PRODUCT_IMAGES[slug] ?? [getFallbackImage(label)];
 
 export const products: Product[] = [
   {
@@ -18,7 +28,7 @@ export const products: Product[] = [
       'Our Mamra almonds are sourced from high-altitude orchards and sun-dried the traditional way. Known for their thin shell, deep flavour and high oil content, they are considered among the finest almonds available. Great for daily eating, soaking overnight, or gifting.',
     category: 'Nuts',
     origin: 'Skardu Valley',
-    images: [placeholder('Mamra Almonds', '0F3D2E'), placeholder('Almonds Close-up', '164B34')],
+    images: imagesFor('premium-mamra-almonds', 'Mamra Almonds'),
     featured: true,
     variants: [
       { weight: '250g', price: 1200, stock: 40 },
@@ -35,7 +45,7 @@ export const products: Product[] = [
       'Kaghzi walnuts are prized for their paper-thin shells that crack open easily to reveal plump, creamy kernels. Grown in the mountain valleys of Gilgit-Baltistan, they are naturally rich in omega-3 fatty acids.',
     category: 'Nuts',
     origin: 'Gilgit-Baltistan',
-    images: [placeholder('Kaghzi Walnuts', '1C5C40'), placeholder('Walnut Kernels', '0B2E22')],
+    images: imagesFor('kaghzi-walnuts', 'Kaghzi Walnuts'),
     featured: true,
     variants: [
       { weight: '250g', price: 950, stock: 45 },
@@ -52,7 +62,7 @@ export const products: Product[] = [
       'These apricots are dried under the open Skardu sun on traditional rooftops, without any added sugar or preservatives. Soft, tangy-sweet, and packed with fibre and vitamin A.',
     category: 'Dried Fruits',
     origin: 'Skardu Valley',
-    images: [placeholder('Dried Apricots', 'AD843A'), placeholder('Apricot Basket', '87652D')],
+    images: imagesFor('sun-dried-skardu-apricots', 'Dried Apricots'),
     featured: true,
     variants: [
       { weight: '250g', price: 700, stock: 50 },
@@ -67,7 +77,7 @@ export const products: Product[] = [
     description: 'Sweet apricot kernels, a local delicacy with a mild nutty taste.',
     category: 'Kernels',
     origin: 'Skardu Valley',
-    images: [placeholder('Apricot Kernels', 'C9A24B'), placeholder('Khubani Giri', 'AD843A')],
+    images: imagesFor('apricot-kernels', 'Apricot Kernels'),
     featured: false,
     variants: [
       { weight: '250g', price: 850, stock: 25 },
@@ -83,7 +93,7 @@ export const products: Product[] = [
       'Our pistachios are carefully sorted for size and colour, then lightly roasted with a touch of natural salt to bring out their signature flavour without overpowering it.',
     category: 'Nuts',
     origin: 'Imported, roasted in Pakistan',
-    images: [placeholder('Pistachios', '3F7A5C'), placeholder('Pista Bowl', '164B34')],
+    images: imagesFor('roasted-salted-pistachios', 'Pistachios'),
     featured: true,
     variants: [
       { weight: '250g', price: 1400, stock: 30 },
@@ -98,7 +108,7 @@ export const products: Product[] = [
     description: 'Large, whole, creamy-white cashews of premium W240 grade.',
     category: 'Nuts',
     origin: 'Imported, packed in Pakistan',
-    images: [placeholder('Cashews', 'E7D9B4'), placeholder('Cashew Nuts', 'DFC26D')],
+    images: imagesFor('whole-cashews-w240', 'Cashews'),
     featured: false,
     variants: [
       { weight: '250g', price: 1100, stock: 35 },
@@ -115,7 +125,7 @@ export const products: Product[] = [
       'Collected from the high rock formations of the Karakoram range near Skardu, our Shilajit is purified using traditional methods and tested for purity. A trusted natural supplement valued for generations in the region.',
     category: 'Shilajit',
     origin: 'Karakoram Range, Skardu',
-    images: [placeholder('Shilajit Resin', '5F4720'), placeholder('Salajeet Jar', '3A2C14')],
+    images: imagesFor('pure-skardu-shilajit', 'Shilajit Resin'),
     featured: true,
     variants: [
       { weight: '20g', price: 2200, stock: 20 },
@@ -130,7 +140,7 @@ export const products: Product[] = [
     description: 'Soft, seedless golden raisins with a naturally sweet taste.',
     category: 'Dried Fruits',
     origin: 'Northern Pakistan',
-    images: [placeholder('Golden Raisins', 'EAD59A'), placeholder('Kishmish', 'DFC26D')],
+    images: imagesFor('golden-raisins-kishmish', 'Golden Raisins'),
     featured: false,
     variants: [
       { weight: '250g', price: 450, stock: 60 },
@@ -145,7 +155,7 @@ export const products: Product[] = [
     description: 'Naturally sweet, sun-dried mulberries from mountain orchards.',
     category: 'Dried Fruits',
     origin: 'Gilgit-Baltistan',
-    images: [placeholder('Dried Mulberries', 'C9DBD1'), placeholder('Toot Khushk', '9FBFAE')],
+    images: imagesFor('dried-mulberries', 'Dried Mulberries'),
     featured: false,
     variants: [
       { weight: '250g', price: 500, stock: 42 },
@@ -161,7 +171,7 @@ export const products: Product[] = [
       'Chilghoza pine nuts are harvested from wild pine forests in the northern mountains and hand-shelled — a labour-intensive process that makes them one of the more precious dry fruits in the region.',
     category: 'Kernels',
     origin: 'Northern Pakistan',
-    images: [placeholder('Chilghoza', '6E9C82'), placeholder('Pine Nuts', '3F7A5C')],
+    images: imagesFor('pine-nuts-chilghoza', 'Chilghoza'),
     featured: true,
     variants: [
       { weight: '250g', price: 1800, stock: 18 },
@@ -175,7 +185,7 @@ export const products: Product[] = [
     description: 'Shelled walnut halves, cleaned and ready to eat.',
     category: 'Kernels',
     origin: 'Gilgit-Baltistan',
-    images: [placeholder('Walnut Kernels', '0F3D2E'), placeholder('Walnut Halves', '164B34')],
+    images: imagesFor('walnut-kernels', 'Walnut Kernels'),
     featured: false,
     variants: [
       { weight: '250g', price: 1050, stock: 28 },
@@ -191,7 +201,7 @@ export const products: Product[] = [
       'Collected from wild beehives across the forested slopes of Gilgit-Baltistan, this honey is raw and unprocessed — no heating, no added sugar. Naturally crystallises over time, a sign of purity.',
     category: 'Natural Products',
     origin: 'Gilgit-Baltistan',
-    images: [placeholder('Wild Honey', 'C9A24B'), placeholder('Honey Jar', 'AD843A')],
+    images: imagesFor('wild-forest-honey', 'Wild Honey'),
     featured: true,
     variants: [
       { weight: '250g', price: 1300, stock: 24 },
@@ -206,7 +216,7 @@ export const products: Product[] = [
     description: 'Traditionally extracted walnut oil, cold-pressed for purity.',
     category: 'Natural Products',
     origin: 'Skardu Valley',
-    images: [placeholder('Walnut Oil', '0B2E22'), placeholder('Oil Bottle', '071F17')],
+    images: imagesFor('cold-pressed-walnut-oil', 'Walnut Oil'),
     featured: false,
     variants: [
       { weight: '250ml', price: 1600, stock: 20 },
@@ -220,7 +230,7 @@ export const products: Product[] = [
     description: 'Soft, naturally sweet dried figs, rich in fibre.',
     category: 'Dried Fruits',
     origin: 'Imported, packed in Pakistan',
-    images: [placeholder('Dried Figs', 'DFC26D'), placeholder('Anjeer', 'C9A24B')],
+    images: imagesFor('dried-fig-anjeer', 'Dried Figs'),
     featured: false,
     variants: [
       { weight: '250g', price: 900, stock: 33 },
@@ -243,31 +253,31 @@ export const CATEGORIES: { name: Product['category']; description: string; image
   {
     name: 'Dry Fruits',
     description: 'Sun-dried apricots, raisins, figs and more.',
-    image: placeholder('Dry Fruits', 'AD843A'),
+    image: CATEGORY_IMAGES['Dry Fruits'] ?? getFallbackImage('Dry Fruits'),
   },
   {
     name: 'Nuts',
     description: 'Almonds, walnuts, pistachios and cashews.',
-    image: placeholder('Nuts', '164B34'),
+    image: CATEGORY_IMAGES['Nuts'] ?? getFallbackImage('Nuts'),
   },
   {
     name: 'Dried Fruits',
     description: 'Naturally sweet, preservative-free dried fruit.',
-    image: placeholder('Dried Fruits', 'DFC26D'),
+    image: CATEGORY_IMAGES['Dried Fruits'] ?? getFallbackImage('Dried Fruits'),
   },
   {
     name: 'Kernels',
     description: 'Apricot kernels, pine nuts and walnut kernels.',
-    image: placeholder('Kernels', '3F7A5C'),
+    image: CATEGORY_IMAGES['Kernels'] ?? getFallbackImage('Kernels'),
   },
   {
     name: 'Natural Products',
     description: 'Wild honey and cold-pressed oils.',
-    image: placeholder('Natural Products', 'C9A24B'),
+    image: CATEGORY_IMAGES['Natural Products'] ?? getFallbackImage('Natural Products'),
   },
   {
     name: 'Shilajit',
     description: 'Pure, lab-tested Shilajit from the Karakoram range.',
-    image: placeholder('Shilajit', '5F4720'),
+    image: CATEGORY_IMAGES['Shilajit'] ?? getFallbackImage('Shilajit'),
   },
 ];

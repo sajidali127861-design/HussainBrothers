@@ -8,7 +8,7 @@
   }
 
   body {
-    background-color: #FAF6EC;
+    background-color: theme('colors.cream.200');
   }
 
   h1, h2, h3, h4 {
@@ -50,7 +50,7 @@
   }
 
   .btn-whatsapp {
-    @apply btn bg-[#1F7A5C] text-cream-100 hover:bg-[#186049];
+    @apply btn bg-whatsapp text-cream-100 hover:bg-whatsapp-dark;
   }
 
   .input-field {

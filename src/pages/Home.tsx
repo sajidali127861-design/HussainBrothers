@@ -4,6 +4,7 @@ import SEO from '@/components/common/SEO';
 import ProductCard from '@/components/product/ProductCard';
 import CategoryCard from '@/components/product/CategoryCard';
 import { CATEGORIES, getFeaturedProducts } from '@/data/products';
+import { STORY_IMAGES } from '@/data/media';
 import { buildWhatsAppUrl } from '@/utils/whatsapp';
 import { BUSINESS_NAME } from '@/config/business';
 
@@ -164,19 +165,19 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-2 gap-3">
             <img
-              src="https://placehold.co/500x650/0F3D2E/FAF6EC?text=Skardu+Valley"
+              src={STORY_IMAGES.mountainValley}
               alt="Skardu mountain valley"
               loading="lazy"
               className="col-span-2 h-56 w-full rounded-2xl object-cover sm:h-72"
             />
             <img
-              src="https://placehold.co/500x400/164B34/FAF6EC?text=Orchards"
+              src={STORY_IMAGES.orchard}
               alt="Orchards near Skardu"
               loading="lazy"
               className="h-32 w-full rounded-2xl object-cover sm:h-40"
             />
             <img
-              src="https://placehold.co/500x400/1C5C40/FAF6EC?text=Sun-Drying"
+              src={STORY_IMAGES.sunDrying}
               alt="Traditional sun-drying of fruit"
               loading="lazy"
               className="h-32 w-full rounded-2xl object-cover sm:h-40"

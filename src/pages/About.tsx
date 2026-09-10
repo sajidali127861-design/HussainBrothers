@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Leaf, Mountain, ShieldCheck, Users } from 'lucide-react';
 import SEO from '@/components/common/SEO';
+import { STORY_IMAGES } from '@/data/media';
 
 const VALUES = [
   {
@@ -62,7 +63,7 @@ export default function About() {
           </div>
 
           <img
-            src="https://placehold.co/700x800/0F3D2E/FAF6EC?text=Hussain+Brothers"
+            src={STORY_IMAGES.aboutHero}
             alt="Hussain Brothers dry fruit stall in Skardu"
             loading="lazy"
             className="aspect-[7/8] w-full rounded-2xl object-cover"

@@ -59,7 +59,7 @@ export default function Footer() {
                 href={buildWhatsAppUrl('Assalam o Alaikum, I have a question about your products.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-1 inline-flex items-center gap-2 rounded-full bg-[#1F7A5C] px-4 py-2 text-xs font-semibold text-white hover:bg-[#186049]"
+                className="mt-1 inline-flex items-center gap-2 rounded-full bg-whatsapp px-4 py-2 text-xs font-semibold text-white hover:bg-whatsapp-dark"
               >
                 <MessageCircle size={14} />
                 Chat on WhatsApp

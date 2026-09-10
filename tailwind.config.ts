@@ -40,6 +40,10 @@ export default {
           300: '#F2EAD4',
           400: '#E7D9B4',
         },
+        whatsapp: {
+          DEFAULT: '#1F7A5C',
+          dark: '#186049',
+        },
         ink: '#1B241F',
       },
       fontFamily: {

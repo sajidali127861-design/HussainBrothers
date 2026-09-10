@@ -179,11 +179,40 @@ export default function Checkout() {
           </form>
 
           <aside className="h-fit rounded-2xl border border-pine-100 bg-white p-6">
-            <h2 className="font-display text-lg font-semibold text-pine-800">Order Summary</h2>
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="font-display text-lg font-semibold text-pine-800">Order Summary</h2>
+
+              {/* Quick visual preview — up to 3 product photos, stacked */}
+              <div className="flex items-center">
+                {items.slice(0, 3).map((item, i) => (
+                  <img
+                    key={`${item.productId}__${item.weight}`}
+                    src={item.image}
+                    alt={item.name}
+                    className="h-9 w-9 rounded-full border-2 border-white object-cover shadow-sm"
+                    style={{ marginLeft: i === 0 ? 0 : -10 }}
+                  />
+                ))}
+                {items.length > 3 && (
+                  <span
+                    className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white bg-pine-100 text-[11px] font-semibold text-pine-700 shadow-sm"
+                    style={{ marginLeft: -10 }}
+                  >
+                    +{items.length - 3}
+                  </span>
+                )}
+              </div>
+            </div>
+
             <div className="mt-4 space-y-3 border-b border-pine-100 pb-4">
               {items.map((item) => (
-                <div key={`${item.productId}__${item.weight}`} className="flex justify-between gap-3 text-sm">
-                  <span className="text-pine-600">
+                <div key={`${item.productId}__${item.weight}`} className="flex items-center gap-3 text-sm">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="h-11 w-11 shrink-0 rounded-lg object-cover"
+                  />
+                  <span className="flex-1 text-pine-600">
                     {item.name} <span className="text-pine-400">({item.weight}) x{item.quantity}</span>
                   </span>
                   <span className="shrink-0 font-medium text-pine-800">{formatPrice(item.price * item.quantity)}</span>
