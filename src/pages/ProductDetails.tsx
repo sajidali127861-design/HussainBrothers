@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { ChevronRight, MessageCircle, ShieldCheck, ShoppingBag, Truck } from 'lucide-react';
+import { ChevronLeft, ChevronRight, MessageCircle, ShieldCheck, ShoppingBag, Truck } from 'lucide-react';
 import SEO from '@/components/common/SEO';
 import QuantitySelector from '@/components/common/QuantitySelector';
 import ProductGrid from '@/components/product/ProductGrid';
@@ -32,6 +32,14 @@ export default function ProductDetails() {
 
   const selectedVariant = product.variants[selectedVariantIndex];
   const inStock = selectedVariant.stock > 0;
+
+  const goToPrevImage = () => {
+    setSelectedImage((i) => (i === 0 ? product.images.length - 1 : i - 1));
+  };
+
+  const goToNextImage = () => {
+    setSelectedImage((i) => (i === product.images.length - 1 ? 0 : i + 1));
+  };
 
   const handleAddToCart = () => {
     addToCart(
@@ -68,31 +76,50 @@ export default function ProductDetails() {
         </nav>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-14">
-          {/* IMAGES */}
+          {/* IMAGE CAROUSEL */}
           <div>
-            <div className="aspect-square overflow-hidden rounded-2xl bg-pine-50">
+            <div className="group relative mx-auto aspect-square w-full max-w-[380px] overflow-hidden rounded-2xl bg-pine-50 shadow-card ring-1 ring-pine-100 lg:max-h-[380px]">
               <img
                 src={product.images[selectedImage]}
-                alt={product.name}
+                alt={`${product.name} — image ${selectedImage + 1} of ${product.images.length}`}
                 className="h-full w-full object-cover"
               />
-            </div>
-            {product.images.length > 1 && (
-              <div className="mt-3 flex gap-3">
-                {product.images.map((img, i) => (
+
+              {product.images.length > 1 && (
+                <>
                   <button
-                    key={img}
-                    onClick={() => setSelectedImage(i)}
-                    aria-label={`Show image ${i + 1}`}
-                    className={`h-16 w-16 overflow-hidden rounded-xl border-2 transition-colors ${
-                      selectedImage === i ? 'border-gold-500' : 'border-transparent'
-                    }`}
+                    type="button"
+                    onClick={goToPrevImage}
+                    aria-label="Previous image"
+                    className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-pine-800 shadow-card transition-colors hover:bg-white"
                   >
-                    <img src={img} alt="" className="h-full w-full object-cover" />
+                    <ChevronLeft size={20} />
                   </button>
-                ))}
-              </div>
-            )}
+                  <button
+                    type="button"
+                    onClick={goToNextImage}
+                    aria-label="Next image"
+                    className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-pine-800 shadow-card transition-colors hover:bg-white"
+                  >
+                    <ChevronRight size={20} />
+                  </button>
+
+                  {/* Dot indicators */}
+                  <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
+                    {product.images.map((img, i) => (
+                      <button
+                        key={img}
+                        onClick={() => setSelectedImage(i)}
+                        aria-label={`Show image ${i + 1}`}
+                        className={`h-1.5 rounded-full transition-all ${
+                          selectedImage === i ? 'w-5 bg-white' : 'w-1.5 bg-white/60'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
           </div>
 
           {/* DETAILS */}

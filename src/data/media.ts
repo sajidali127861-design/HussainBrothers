@@ -38,45 +38,56 @@ export const PRODUCT_IMAGES: Record<string, string[]> = {
   ],
   'kaghzi-walnuts': [
     unsplash('photo-1524593000379-d4729b2c4f99'),
+    unsplash('photo-1524593000379-d4729b2c4f99', 'q=80&w=900&h=900&fit=crop&auto=format&flip=h'),
   ],
   'sun-dried-skardu-apricots': [
     unsplash('photo-1610401882421-f05386f4dfc5'),
+    unsplash('photo-1610401882421-f05386f4dfc5', 'q=80&w=900&h=900&fit=crop&auto=format&flip=h'),
   ],
   'apricot-kernels': [
     unsplash('photo-1610401882421-f05386f4dfc5', 'q=80&w=900&h=900&fit=crop&auto=format&sat=-20'),
+    unsplash('photo-1610401882421-f05386f4dfc5', 'q=80&w=900&h=900&fit=crop&auto=format&sat=-20&flip=h'),
   ],
   'roasted-salted-pistachios': [
     unsplash('photo-1551238875-13b9d38454db'),
+    unsplash('photo-1551238875-13b9d38454db', 'q=80&w=900&h=900&fit=crop&auto=format&flip=h'),
   ],
   'whole-cashews-w240': [
     unsplash('photo-1573555657105-47a0bb37c3ea'),
+    unsplash('photo-1573555657105-47a0bb37c3ea', 'q=80&w=900&h=900&fit=crop&auto=format&flip=h'),
   ],
   'pure-skardu-shilajit': [
-    // No freely-licensed real photo of Shilajit was found — replace this
-    // with your own product photo before launch (see instructions above).
-    placeholder('Shilajit Resin', '5F4720'),
-    placeholder('Salajeet Jar', '3A2C14'),
+    '/images/shailajit_one.jpg',
+    '/images/shilajit_two.jpg',
+  
   ],
   'golden-raisins-kishmish': [
     unsplash('photo-1691657917109-c6e027eac44a'),
+    unsplash('photo-1691657917109-c6e027eac44a', 'q=80&w=900&h=900&fit=crop&auto=format&flip=h'),
   ],
   'dried-mulberries': [
     unsplash('photo-1691657917109-c6e027eac44a', 'q=80&w=900&h=900&fit=crop&auto=format&sat=-15'),
+    unsplash('photo-1691657917109-c6e027eac44a', 'q=80&w=900&h=900&fit=crop&auto=format&sat=-15&flip=h'),
   ],
   'pine-nuts-chilghoza': [
     unsplash('photo-1524593000379-d4729b2c4f99', 'q=80&w=900&h=900&fit=crop&auto=format&sat=-10'),
+    unsplash('photo-1524593000379-d4729b2c4f99', 'q=80&w=900&h=900&fit=crop&auto=format&sat=-10&flip=h'),
   ],
   'walnut-kernels': [
     unsplash('photo-1524593000379-d4729b2c4f99', 'q=80&w=900&h=900&fit=crop&auto=format&flip=h'),
+    unsplash('photo-1524593000379-d4729b2c4f99', 'q=80&w=900&h=900&fit=crop&auto=format'),
   ],
   'wild-forest-honey': [
     unsplash('photo-1568657704598-602700bd9694'),
+    unsplash('photo-1568657704598-602700bd9694', 'q=80&w=900&h=900&fit=crop&auto=format&flip=h'),
   ],
   'cold-pressed-walnut-oil': [
     unsplash('photo-1568657704598-602700bd9694', 'q=80&w=900&h=900&fit=crop&auto=format&sat=-30'),
+    unsplash('photo-1568657704598-602700bd9694', 'q=80&w=900&h=900&fit=crop&auto=format&sat=-30&flip=h'),
   ],
   'dried-fig-anjeer': [
     unsplash('photo-1610401882421-f05386f4dfc5', 'q=80&w=900&h=900&fit=crop&auto=format&flip=h'),
+    unsplash('photo-1610401882421-f05386f4dfc5', 'q=80&w=900&h=900&fit=crop&auto=format&sat=-10&flip=h'),
   ],
 };
 
@@ -85,12 +96,11 @@ export const PRODUCT_IMAGES: Record<string, string[]> = {
  * src/data/products.ts (CATEGORIES array / Product['category']).
  */
 export const CATEGORY_IMAGES: Record<string, string> = {
-  'Dry Fruits': unsplash('photo-1610401882421-f05386f4dfc5'),
-  Nuts: unsplash('photo-1641430470762-13c3489762e7'),
+Nuts: unsplash('photo-1641430470762-13c3489762e7'),
   'Dried Fruits': unsplash('photo-1691657917109-c6e027eac44a'),
   Kernels: unsplash('photo-1524593000379-d4729b2c4f99'),
   'Natural Products': unsplash('photo-1568657704598-602700bd9694'),
-  Shilajit: placeholder('Shilajit', '5F4720'),
+  Shilajit: '/images/shilajit_two.jpg',
 };
 
 /**

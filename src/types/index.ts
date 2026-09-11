@@ -1,10 +1,9 @@
 export type Category =
-  | 'Dry Fruits'
-  | 'Nuts'
-  | 'Dried Fruits'
-  | 'Kernels'
-  | 'Natural Products'
-  | 'Shilajit';
+  |'Nuts'
+  |'Dried Fruits'
+  |'Kernels'
+  |'Natural Products'
+  |'Shilajit';
 
 export interface ProductVariant {
   weight: string; // e.g. "250g", "500g", "1kg"
@@ -43,4 +42,4 @@ export interface CustomerDetails {
   note?: string;
 }
 
-export type SortOption = 'featured' | 'price-asc' | 'price-desc' | 'name-asc';
+export type SortOption = 'popular' | 'price-asc' | 'price-desc' | 'name-asc';

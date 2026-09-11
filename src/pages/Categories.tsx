@@ -1,5 +1,6 @@
 import SEO from '@/components/common/SEO';
 import CategoryCard from '@/components/product/CategoryCard';
+import CategoryCarousel from '@/components/product/CategoryCarousel';
 import { CATEGORIES } from '@/data/products';
 
 export default function Categories() {
@@ -19,10 +20,12 @@ export default function Categories() {
           From everyday nuts to rare Shilajit resin — find exactly what you're looking for.
         </p>
 
-        <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3">
-          {CATEGORIES.map((category) => (
-            <CategoryCard key={category.name} {...category} />
-          ))}
+        <div className="mt-10">
+          <CategoryCarousel>
+            {CATEGORIES.map((category) => (
+              <CategoryCard key={category.name} {...category} />
+            ))}
+          </CategoryCarousel>
         </div>
       </section>
     </>

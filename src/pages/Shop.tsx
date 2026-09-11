@@ -7,7 +7,7 @@ import { CATEGORIES, getMinPrice, products } from '@/data/products';
 import type { Category, SortOption } from '@/types';
 
 const SORT_OPTIONS: { value: SortOption; label: string }[] = [
-  { value: 'featured', label: 'Featured' },
+  { value: 'popular', label: 'Featured' },
   { value: 'price-asc', label: 'Price: Low to High' },
   { value: 'price-desc', label: 'Price: High to Low' },
   { value: 'name-asc', label: 'Name: A to Z' },

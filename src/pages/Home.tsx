@@ -2,7 +2,9 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Leaf, MessageCircle, Mountain, ShieldCheck, Truck } from 'lucide-react';
 import SEO from '@/components/common/SEO';
 import ProductCard from '@/components/product/ProductCard';
+import ProductCarousel from '@/components/product/ProductCarousel';
 import CategoryCard from '@/components/product/CategoryCard';
+import CategoryCarousel from '@/components/product/CategoryCarousel';
 import { CATEGORIES, getFeaturedProducts } from '@/data/products';
 import { STORY_IMAGES } from '@/data/media';
 import { buildWhatsAppUrl } from '@/utils/whatsapp';
@@ -35,7 +37,6 @@ const TRUST_POINTS = [
 
 export default function Home() {
   const featured = getFeaturedProducts().slice(0, 8);
-
   return (
     <>
       <SEO
@@ -49,7 +50,7 @@ export default function Home() {
         <div className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-gold-500/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-32 -left-16 h-80 w-80 rounded-full bg-pine-500/20 blur-3xl" />
 
-        <div className="container-page relative flex flex-col items-start gap-8 py-20 sm:py-24 lg:flex-row lg:items-center lg:gap-16 lg:py-32">
+        <div  className="container-page relative flex flex-col items-start gap-8 py-12 sm:py-14 lg:flex-row lg:items-center lg:gap-16 lg:py-16">
           <div className="max-w-xl animate-slide-up">
             <span className="eyebrow text-gold-400">Skardu, Gilgit-Baltistan</span>
             <h1 className="mt-4 text-balance font-display text-4xl font-semibold leading-[1.1] text-cream-100 sm:text-5xl lg:text-6xl">
@@ -87,13 +88,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FEATURED PRODUCTS */}
+      {/* POPULAR PRODUCTS */}
       <section className="container-page py-16 sm:py-20">
         <div className="flex items-end justify-between gap-4">
           <div>
             <span className="eyebrow">Handpicked for you</span>
             <h2 className="mt-2 font-display text-2xl font-semibold text-pine-800 sm:text-3xl">
-              Featured products
+              Popular Products
             </h2>
           </div>
           <Link to="/shop" className="hidden shrink-0 items-center gap-1 text-sm font-medium text-pine-600 hover:text-pine-800 sm:flex">
@@ -101,10 +102,12 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4">
-          {featured.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        <div className="mt-8">
+          <ProductCarousel>
+            {featured.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </ProductCarousel>
         </div>
 
         <Link to="/shop" className="mt-8 flex items-center justify-center gap-1 text-sm font-medium text-pine-600 hover:text-pine-800 sm:hidden">
@@ -117,10 +120,12 @@ export default function Home() {
         <div className="container-page">
           <span className="eyebrow">Explore the range</span>
           <h2 className="mt-2 font-display text-2xl font-semibold text-pine-800 sm:text-3xl">Shop by category</h2>
-          <div className="mt-8 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3">
-            {CATEGORIES.map((category) => (
-              <CategoryCard key={category.name} {...category} />
-            ))}
+          <div className="mt-8">
+            <CategoryCarousel>
+              {CATEGORIES.map((category) => (
+                <CategoryCard key={category.name} {...category} />
+              ))}
+            </CategoryCarousel>
           </div>
         </div>
       </section>

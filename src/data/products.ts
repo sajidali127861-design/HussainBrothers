@@ -250,11 +250,7 @@ export const getMinPrice = (product: Product) =>
   Math.min(...product.variants.map((v) => v.price));
 
 export const CATEGORIES: { name: Product['category']; description: string; image: string }[] = [
-  {
-    name: 'Dry Fruits',
-    description: 'Sun-dried apricots, raisins, figs and more.',
-    image: CATEGORY_IMAGES['Dry Fruits'] ?? getFallbackImage('Dry Fruits'),
-  },
+
   {
     name: 'Nuts',
     description: 'Almonds, walnuts, pistachios and cashews.',
