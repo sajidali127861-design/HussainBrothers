@@ -8,7 +8,7 @@ export default function Categories() {
     <>
       <SEO
         title="Shop by Category"
-        description="Browse Hussain Brothers products by category: Dry Fruits, Nuts, Dried Fruits, Kernels, Natural Products and Shilajit."
+        description="Browse Hussain Brothers products by category: Nuts, Dried Fruits, Kernels, Natural Products and Shilajit."
       />
 
       <section className="container-page py-12 sm:py-16">

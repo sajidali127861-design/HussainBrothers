@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Leaf, Mountain, ShieldCheck, Users } from 'lucide-react';
 import SEO from '@/components/common/SEO';
 import { STORY_IMAGES } from '@/data/media';
-
 const VALUES = [
   {
     icon: Mountain,

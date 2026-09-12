@@ -79,7 +79,7 @@ export default function ProductDetails() {
           {/* IMAGE CAROUSEL */}
           <div>
             <div className="group relative mx-auto aspect-square w-full max-w-[380px] overflow-hidden rounded-2xl bg-pine-50 shadow-card ring-1 ring-pine-100 lg:max-h-[380px]">
-              <img
+              <img decoding="async"
                 src={product.images[selectedImage]}
                 alt={`${product.name} — image ${selectedImage + 1} of ${product.images.length}`}
                 className="h-full w-full object-cover"

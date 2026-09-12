@@ -14,7 +14,7 @@ export default function CategoryCard({ name, description, image }: CategoryCardP
       to={`/shop?category=${encodeURIComponent(name)}`}
       className="group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-2xl"
     >
-      <img
+      <img decoding="async"
         src={image}
         alt={name}
         loading="lazy"

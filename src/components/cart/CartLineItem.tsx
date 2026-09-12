@@ -11,7 +11,7 @@ export default function CartLineItem({ item }: { item: CartItem }) {
   return (
     <div className="flex gap-4 border-b border-pine-100 py-5 last:border-0">
       <Link to={`/product/${item.slug}`} className="h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-pine-50 sm:h-24 sm:w-24">
-        <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
+        <img decoding="async" src={item.image} alt={item.name} loading="lazy" className="h-full w-full object-cover" />
       </Link>
 
       <div className="flex flex-1 flex-col justify-between gap-2">

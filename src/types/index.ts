@@ -1,9 +1,9 @@
 export type Category =
-  |'Nuts'
-  |'Dried Fruits'
-  |'Kernels'
-  |'Natural Products'
-  |'Shilajit';
+  | 'Nuts'
+  | 'Dried Fruits'
+  | 'Kernels'
+  | 'Natural Products'
+  | 'Shilajit';
 
 export interface ProductVariant {
   weight: string; // e.g. "250g", "500g", "1kg"
@@ -42,4 +42,37 @@ export interface CustomerDetails {
   note?: string;
 }
 
-export type SortOption = 'popular' | 'price-asc' | 'price-desc' | 'name-asc';
+export type SortOption = 'featured' | 'price-asc' | 'price-desc' | 'name-asc';
+
+/** One line item as sent to the Google Apps Script order endpoint. */
+export interface OrderItemPayload {
+  productName: string;
+  weight: string;
+  quantity: number;
+  price: number;
+}
+
+/** Full request body sent to the Google Apps Script Web App. */
+export interface OrderPayload {
+  orderRef: string;
+  date: string;
+  customer: CustomerDetails;
+  items: OrderItemPayload[];
+  subtotal: number;
+  total: number;
+}
+
+/** Response shape returned by the Google Apps Script Web App. */
+export interface OrderApiResponse {
+  success: boolean;
+  orderRef?: string;
+  message: string;
+}
+
+/** What gets passed to the Order Success page after a confirmed order. */
+export interface PlacedOrder {
+  orderRef: string;
+  customer: CustomerDetails;
+  items: CartItem[];
+  subtotal: number;
+}

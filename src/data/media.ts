@@ -96,9 +96,9 @@ export const PRODUCT_IMAGES: Record<string, string[]> = {
  * src/data/products.ts (CATEGORIES array / Product['category']).
  */
 export const CATEGORY_IMAGES: Record<string, string> = {
-Nuts: unsplash('photo-1641430470762-13c3489762e7'),
+  Nuts: unsplash('photo-1641430470762-13c3489762e7'),
   'Dried Fruits': unsplash('photo-1691657917109-c6e027eac44a'),
-  Kernels: unsplash('photo-1524593000379-d4729b2c4f99'),
+   Kernels: unsplash('photo-1524593000379-d4729b2c4f99'),
   'Natural Products': unsplash('photo-1568657704598-602700bd9694'),
   Shilajit: '/images/shilajit_two.jpg',
 };

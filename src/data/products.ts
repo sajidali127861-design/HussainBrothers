@@ -250,7 +250,6 @@ export const getMinPrice = (product: Product) =>
   Math.min(...product.variants.map((v) => v.price));
 
 export const CATEGORIES: { name: Product['category']; description: string; image: string }[] = [
-
   {
     name: 'Nuts',
     description: 'Almonds, walnuts, pistachios and cashews.',

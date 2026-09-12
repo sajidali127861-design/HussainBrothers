@@ -36,7 +36,7 @@ export default function ProductCard({ product }: { product: Product }) {
       className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-card transition-shadow hover:shadow-soft"
     >
       <div className="relative aspect-square overflow-hidden bg-pine-50">
-        <img
+        <img decoding="async"
           src={product.images[0]}
           alt={product.name}
           loading="lazy"
@@ -44,7 +44,7 @@ export default function ProductCard({ product }: { product: Product }) {
         />
         {product.featured && (
           <span className="absolute left-3 top-3 rounded-full bg-gold-500 px-3 py-1 text-[11px] font-semibold text-pine-900">
-             Popular
+            Featured
           </span>
         )}
       </div>

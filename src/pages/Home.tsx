@@ -37,6 +37,7 @@ const TRUST_POINTS = [
 
 export default function Home() {
   const featured = getFeaturedProducts().slice(0, 8);
+
   return (
     <>
       <SEO
@@ -50,7 +51,7 @@ export default function Home() {
         <div className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-gold-500/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-32 -left-16 h-80 w-80 rounded-full bg-pine-500/20 blur-3xl" />
 
-        <div  className="container-page relative flex flex-col items-start gap-8 py-12 sm:py-14 lg:flex-row lg:items-center lg:gap-16 lg:py-16">
+        <div className="container-page relative flex flex-col items-start gap-8 py-20 sm:py-24 lg:flex-row lg:items-center lg:gap-16 lg:py-32">
           <div className="max-w-xl animate-slide-up">
             <span className="eyebrow text-gold-400">Skardu, Gilgit-Baltistan</span>
             <h1 className="mt-4 text-balance font-display text-4xl font-semibold leading-[1.1] text-cream-100 sm:text-5xl lg:text-6xl">
@@ -75,11 +76,10 @@ export default function Home() {
           <div className="grid w-full max-w-md grid-cols-2 gap-3 lg:ml-auto">
             {featured.slice(0, 4).map((product) => (
               <div key={product.id} className="overflow-hidden rounded-2xl bg-pine-700/50 p-2 backdrop-blur">
-                <img
+                <img decoding="async"
                   src={product.images[0]}
                   alt={product.name}
                   className="aspect-square w-full rounded-xl object-cover"
-                  loading="lazy"
                 />
                 <p className="mt-2 truncate px-1 pb-1 text-xs font-medium text-cream-200">{product.name}</p>
               </div>
@@ -169,19 +169,19 @@ export default function Home() {
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <img
+            <img decoding="async"
               src={STORY_IMAGES.mountainValley}
               alt="Skardu mountain valley"
               loading="lazy"
               className="col-span-2 h-56 w-full rounded-2xl object-cover sm:h-72"
             />
-            <img
+            <img decoding="async"
               src={STORY_IMAGES.orchard}
               alt="Orchards near Skardu"
               loading="lazy"
               className="h-32 w-full rounded-2xl object-cover sm:h-40"
             />
-            <img
+            <img decoding="async"
               src={STORY_IMAGES.sunDrying}
               alt="Traditional sun-drying of fruit"
               loading="lazy"

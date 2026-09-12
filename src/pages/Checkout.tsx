@@ -1,12 +1,12 @@
 import { type ChangeEvent, type FormEvent, useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { MessageCircle } from 'lucide-react';
+import { Loader2, PackageCheck } from 'lucide-react';
 import SEO from '@/components/common/SEO';
 import { useCart } from '@/context/CartContext';
 import { formatPrice } from '@/utils/currency';
-import { buildOrderMessage, openWhatsApp } from '@/utils/whatsapp';
+import { buildOrderPayload, generateOrderReference, submitOrder } from '@/utils/order';
 import { DELIVERY_NOTE } from '@/config/business';
-import type { CustomerDetails } from '@/types';
+import type { CustomerDetails, PlacedOrder } from '@/types';
 
 type FormErrors = Partial<Record<keyof CustomerDetails, string>>;
 
@@ -48,6 +48,7 @@ export default function Checkout() {
   const [form, setForm] = useState<CustomerDetails>(initialForm);
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   if (items.length === 0) {
     return <Navigate to="/cart" replace />;
@@ -61,9 +62,13 @@ export default function Checkout() {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
   };
-
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    // Guard against double-submission (e.g. accidental double-click) —
+    // the button is also disabled while submitting, this is a second layer.
+    if (submitting) return;
+
     const validationErrors = validate(form);
     setErrors(validationErrors);
 
@@ -71,26 +76,49 @@ export default function Checkout() {
       return;
     }
 
+    setSubmitError(null);
     setSubmitting(true);
 
-    const message = buildOrderMessage(form, items, cartTotal);
-    openWhatsApp(message);
+    try {
+      const orderRef = generateOrderReference();
+      const payload = buildOrderPayload(orderRef, form, items, cartTotal);
+      const result = await submitOrder(payload);
 
-    // Persist the last order details for the success page, then clear the cart.
-    sessionStorage.setItem('hb_last_order_total', String(cartTotal));
-    clearCart();
-    setSubmitting(false);
-    navigate('/order-success');
+      if (!result.success) {
+        // Do NOT clear the cart and do NOT show success — the order was
+        // not actually recorded, so the customer must be able to retry.
+        setSubmitError(result.message || "We couldn't complete your order right now. Please try again.");
+        setSubmitting(false);
+        return;
+      }
+
+      const placedOrder: PlacedOrder = {
+        orderRef: result.orderRef || orderRef,
+        customer: form,
+        items,
+        subtotal: cartTotal,
+      };
+
+      // Only clear the cart and navigate to success AFTER the backend has
+      // confirmed the order was actually saved.
+      clearCart();
+      navigate('/order-success', { state: { order: placedOrder } });
+    } catch {
+      // A genuine network failure (no internet, DNS issue, etc) — same
+      // rule applies: cart stays intact, customer can try again.
+      setSubmitError("We couldn't complete your order right now. Please check your connection and try again.");
+      setSubmitting(false);
+    }
   };
 
   return (
     <>
-      <SEO title="Checkout" description="Complete your order details to place an order with Hussain Brothers via WhatsApp." />
+          <SEO title="Checkout" description="Complete your order details to place an order with Hussain Brothers." />
 
       <section className="container-page py-10 sm:py-14">
         <h1 className="font-display text-3xl font-semibold text-pine-800 sm:text-4xl">Checkout</h1>
         <p className="mt-2 max-w-md text-sm text-pine-500">
-          No account needed. Fill in your details below and confirm your order on WhatsApp.
+          No account needed. Fill in your details below to place your order.
         </p>
 
         <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-12">
@@ -169,12 +197,32 @@ export default function Checkout() {
               </div>
             </div>
 
-            <button type="submit" disabled={submitting} className="btn-whatsapp mt-7 w-full">
-              <MessageCircle size={17} />
-              Confirm Order
+                      {submitError && (
+              <div
+                role="alert"
+                className="mt-5 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600"
+              >
+                {submitError}
+              </div>
+            )}
+
+            <button type="submit" disabled={submitting} className="btn-primary mt-7 w-full">
+              {submitting ? (
+                <>
+                  <Loader2 size={17} className="animate-spin" />
+                  Processing your order...
+                </>
+              ) : (
+                <>
+                  <PackageCheck size={17} />
+                  Confirm Order
+                </>
+              )}
             </button>
             <p className="mt-3 text-center text-xs text-pine-400">
-              This will open WhatsApp with your order details pre-filled. You'll need to press Send there to confirm.
+              {submitting
+                ? "Please don't close this page — we're recording your order."
+                : "We'll contact you to confirm delivery details after you place your order."}
             </p>
           </form>
 
